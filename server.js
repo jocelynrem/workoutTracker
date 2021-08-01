@@ -11,12 +11,14 @@ app.use(express.json());
 app.use(express.static("public"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
+  useUnifiedTopology: true,
   useNewUrlParser: true,
 });
 
-// routes
-app.use(require("./controllers/html.js"));
-app.use(require("./controllers/api.js"));
+mongoose.Promise = global.Promise;
+
+app.use(require("./routes/html.js"));
+app.use(require("./routes/api.js"));
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
