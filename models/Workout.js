@@ -1,15 +1,19 @@
-// Set up Schema object
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-//Define Schema
 const workoutSchema = new Schema({
   day: {
     type: Number,
     default: new Date(),
   },
-  exercises: Array,
-}, {
+  exercises: [{
+    type: String,
+    name: String,
+    duration: Number,
+    weight: Number,
+    reps: Number,
+    sets: Number
+  }],
   versionKey: false,
 });
 
