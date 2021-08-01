@@ -13,8 +13,6 @@ const workoutSchema = new Schema({
   versionKey: false,
 });
 
-// Link Schema
 const Workout = mongoose.model("Workout", workoutSchema);
 
-// Export Handle for Schema
 module.exports = Workout;
