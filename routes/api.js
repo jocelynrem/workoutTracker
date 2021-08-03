@@ -32,16 +32,29 @@ router.post("/api/workouts", (req, res) => {
     })
 });
 
-router.put("/api/workouts/:id", async (req, res) => {
+// router.put("/api/workouts/:id", async (req, res) => {
+//     Workout.aggregate([
+//       { $match: { _id: req.params.id } },
+//       { $addFields: { exercises: req.body } }
+//     ])
+//     .then((response) => {
+//       res.json(response)
+//     })
+//     .then((err) => {
+//       res.json(err)
+//     })
+// })
 
-    Workout.aggregate([
-      { $match: { _id: req.params.id } },
-      { $addFields: { exercises: req.body } }
-    ])
+router.put("/api/workouts/:id", async (req, res) => {
+  Workout.findByIdAndUpdate(
+    req.params.id, { 
+      $push: { 
+        exercises: req.body } 
+      })
     .then((response) => {
       res.json(response)
     })
-    .then((err) => {
+    .catch((err) => {
       res.json(err)
     })
 })
